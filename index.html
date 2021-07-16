@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Gem Drop</title>
+ 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="tippy.css">
+		<script src="https://cdn1.kongregate.com/javascripts/kongregate_api.js"></script>
+ 		<script src="poly-decomp-legacy-min.js"></script>
+		<script src="matter.js"></script>
+		<script src="gameloop-worker.js"></script>
+		<script src="Runner.js"></script>
+		<script src="Render.js"></script>
+		<script src="Base64.js"></script>
+	</head>
+	<body>
+		<div id="vfx"></div>
+		<div class="achievement" id="inv_hover">
+			<img class="icon" src="img/trophy.png">
+			<div class="text">
+				<strong class="name">Hello World</strong>
+				<span class="description">Popup text goes here</span>
+				<small class="redtext">Secret red text</small>
+			</div>
+			<div class="value">$500</div>
+			<div class="clear"></div>
+		</div>
+		<div id="achievement_popups">
+<!-- 		<div class="achievement">
+				<img class="icon" src="">
+				<div class="text">
+					<strong class="name">Hello World</strong>
+					<span class="description">Popup text goes here</span>
+					<small class="redtext">Secret red text</small>
+				</div>
+				<div class="value">$500</div>
+				<div class="clear"></div>
+			</div> -->
+		</div>
+
+
+		<!-- BEGIN MODALS -->
+		<div class="modal" id="achievements">
+			<h2>Achievements</h2>
+			<a href="javascript:void(0)" class="close">[close]</a>
+			<div class="modal_inner">
+	<!-- 			<div class="achievement_icon popup_container">
+					<img class="icon popup_anchor" src="">
+					<div class="popup achievement">
+						<img class="icon" src="">
+						<div class="text">
+							<strong class="name">Hello World</strong>
+							<span class="description">Popup text goes here</span>
+							<small class="redtext">Secret red text</small>
+						</div>
+						<div class="value">$500</div>
+						<div class="clear"></div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<div class="modal" id="stats">
+			<h2>Statistics</h2>
+			<a href="javascript:void(0)" class="close">[close]</a>
+			<div class="modal_inner">
+				<strong>Gems dropped:</strong><span id="stats_gems">0</span><br>
+				<strong>Total money earned:</strong><span id="stats_money">$0</span><br>
+				<strong>Gems spawned by clicking:</strong><span id="stats_clickpower_gems">0</span><br>
+				<strong>Gems lost:</strong><span id="stats_wasted">0</span><br>
+				<strong>Upgrades:</strong><span id="stats_upgrades">0</span><br>
+				<strong>Click Powers:</strong><span id="stats_clickpowers">1</span><br>
+				<strong>Factories:</strong><span id="stats_factories">0</span><br>
+				<strong>Achievements:</strong><span id="stats_achievements">0</span><br>
+				<!-- <strong>Prestige:</strong><span id="stats_prestige">0</span><br> -->
+				<strong>Time played:</strong><span id="stats_time">0s</span><br>
+				<!-- <strong>Time played (this prestige):</strong><span id="stats_prestige_time">0s</span><br> -->
+			</div>
+		</div>
+		<div class="modal" id="settings">
+			<h2>Settings</h2>
+			<a href="javascript:void(0)" class="close">[close]</a>
+			<div class="modal_inner">
+				<strong>Render Sprites:</strong><input type="checkbox" checked id="sprites"><br>
+				<div style="display:none"><strong>Floating numbers:</strong><input type="checkbox" checked id="settings_particles"><br></div>
+				<strong>Autosave:</strong><input type="checkbox" checked id="autosave"><span>Saves game in real time</span><br>
+				<strong>Save game:</strong><button id="save">Save</button><span id="lastsaved">Last saved less than a second ago</span><br>
+				<strong>Export game:</strong><button id="export">Export</button><span id="export_instructions">Copy the following code to a text file:</span><br>
+				<textarea id="export_textarea">asdf</textarea>
+				<strong>Import game:</strong><input type="text" id="import_field"><button id="import_button">Import</button><br>
+				<strong style="color:red">Hard reset:</strong><button id="reset">Delete all saved data</button><br>
+			</div>
+		</div>
+		<div class="modal" id="bought_upgrades">
+			<h2>Owned Upgrades</h2>
+			<a href="javascript:void(0)" class="close">[close]</a>
+			<div class="modal_inner">
+	<!-- 			<div class="achievement_icon popup_container">
+					<img class="icon popup_anchor" src="">
+					<div class="popup achievement">
+						<img class="icon" src="">
+						<div class="text">
+							<strong class="name">Hello World</strong>
+							<span class="description">Popup text goes here</span>
+							<small class="redtext">Secret red text</small>
+						</div>
+						<div class="value">$500</div>
+						<div class="clear"></div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<!-- END MODALS -->
+
+
+		<div id="container">
+			<div id="render_container">
+				<div id="render"></div>
+				<div id="money"><span id="actual_money"></span><span id="predicted_money"></span></div>	
+				<div id="buttons">
+					<button id="drop">DROP</button>
+					<img id="autodrop_icon" title="Auto Drop active">
+					<!-- <button onclick="cheat()">Cheat</button>
+					<button onclick="debug()">Debug</button> -->
+				</div>
+				<div id="buffs" class="section">
+<!-- 					<div class="section_name">
+						<strong>Buffs</strong>
+					</div>
+					<div class="clear"></div> -->
+<!-- 					<div class="buff_container">
+		 				<div class="buff popup_container">
+							<div class="popup_anchor">asdf</div>
+							<div class="popup">
+								<strong class="name">asdf</strong>
+								<div class="description">+10 butts for 3.5 seconds</div>
+							</div>
+						</div>
+						<div class="progressbar_container">
+							<div class="progressbar_outer"><div class="progressbar_inner"></div></div>
+							<div class="timeleft">3s</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<div id="ui">
+				<div id="menu">
+					<a href="javascript:openAchievements();">Achievements</a>
+					<a href="javascript:openStats();">Stats</a>
+					<a href="javascript:openSettings();">Settings</a>
+				</div>
+				<div id="click_powers" class="section">
+					<div class="section_name">
+						<strong>Click Powers</strong>
+					</div>
+					<div class="clear scroll"></div>
+<!-- 	 				<div class="gem_click_power popup_container">
+						<img src="img/quartz-clickpower.png" class="clickpower popup_anchor">
+						<div class="popup">
+							<strong class="name">Quartz</strong>
+							<div class="rate">+1 per click</div>
+							<div class="price">$1 each</div>
+						</div>
+					</div> -->
+				</div>
+				<div id="factories" class="section">
+					<div class="section_name">
+						<strong>Factories</strong>
+						<div id="buymode">
+							<div id="buymode_mode">
+								<span id="buy" class="active">BUY</span>
+								<span id="sell">SELL</span>
+							</div>
+							<div id="buymode_quantity">
+								<span id="buy_1" class="active">1</span>
+								<span id="buy_10">10</span>
+								<span id="buy_100">100</span>
+								<span id="buy_max">MAX</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- <div class="clear"></div> -->
+
+					<div class="clear"></div>
+					<div class="scroll"></div>
+	<!-- 			<div class="factory popup_container">
+						<div class="popup_anchor">Quartz</span>
+						<div class="popup">
+							<strong class="name">Quartz Factory</strong>
+							<div class="rate">+1 per second</div>
+							<div class="price">Costs $18</div>
+							<div class="owned">0 owned</div>
+						</div>
+					</div> -->
+				</div>
+				
+				<div id="upgrades" class="section">
+					<div class="section_name">
+						<strong>Upgrades</strong>
+					</div>
+					<div class="clear"></div>
+	<!-- 			<div class="upgrade popup_container">
+						<div class="popup_anchor">asdf</span>
+						<div class="popup">
+							<strong class="name">asdf</strong>
+							<div class="description">blah blah blah</div>
+							<div class="price">Costs $18</div>
+						</div>
+					</div> -->
+
+				</div>
+				<a href="javascript:openUpgrades()" id="open_owned_upgrades">View Owned Upgrades</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="popup" id="my-template-id" style="display: none;">
+			<strong class="name">Quartz</strong>
+			<div class="rate">+1 per click</div>
+			<div class="price">$1 each</div>
+			<div class="costs">Costs $10</div>
+		</div>
+		<script src="tippy.js"></script>
+		<script src="data.js"></script>
+		<script src="game.js"></script>
+		<script src="physics.js"></script>
+		<!-- <script src="sim.js"></script> -->
+	</body>
+</html>

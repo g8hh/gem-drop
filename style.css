@@ -1,0 +1,670 @@
+* {
+	cursor:default;
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+	     -moz-user-select: none; /* Firefox */
+	      -ms-user-select: none; /* Internet Explorer/Edge */
+	          user-select: none; /* Non-prefixed version, currently
+	                              supported by Chrome and Opera */
+
+	font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+
+	/*display:none;*/
+}
+
+/*#render {
+	display:none;
+}*/
+
+.clear {
+	clear:both;
+}
+
+/*#container::after{
+	content: " ";
+	display: block; 
+	height: 0; 
+	clear: both;
+}*/
+
+.section, #buttons {
+	float:left;
+	clear:both;
+}
+
+#render_container {
+	/*visibility: hidden;*/
+}
+
+#container, #render_container {
+	float:left;
+}
+
+#ui {
+	padding:0 10px;
+	width:800px;
+	overflow-x:hidden;
+	/*overflow-y:scroll;*/
+}
+
+#drop	 {
+	/*position:absolute;
+	top:100px;
+	left:100px;*/
+}
+
+#render {
+	text-align:center;
+}
+
+#render canvas {
+	display:inline-block;
+}
+
+#money {
+	font-size:30px;
+	background-color:#89ff97;
+	padding:10px;
+	text-align: center;
+	width:300px;
+}
+
+#predicted_money {
+	color:#a8a8a8;
+}
+
+.section, .section_name {
+	clear:both;
+}
+
+.section_name {
+	background-color:#000;
+	color:white;
+	width:770px;
+	padding:10px;
+	display:inline-block;
+	margin-top:5px;
+	margin-bottom:5;
+}
+
+/* POPUPS */
+.popup_container {
+	position: relative;
+	display:block;
+	float:left;
+}
+
+.popup_anchor {
+	float:left;
+	margin:5px;
+/*	margin-right: 10px;
+	margin-top:10px;*/
+	border:1px solid black;
+	padding: 10px;
+	cursor: pointer;
+}
+
+.popup_container .popup {
+	visibility: hidden;
+	position: absolute;
+	z-index: 1;
+
+	background-color: #000;
+    color: #fff;
+	opacity:0;
+	border-radius: 6px;
+	padding:10px;
+
+	transition: margin-top 0.1s, opacity 0.1s, visibility 0.1s;
+
+	box-shadow:0px 0px 8px #727272;
+
+	width: 120px;
+    top: 100%;
+    margin-top:25px;
+    left: 50%; 
+    margin-left: -70px; /* Use half of the width (120/2 = 60), to center the tooltip */
+
+    pointer-events: none;
+}
+
+.popup_container .popup::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+}
+
+/*.popup_container:hover .popup {
+	visibility: visible;
+	margin-top:7px;
+	top: 90%;
+	opacity: 1;
+}*/
+
+.popup_container .disabled {
+	border: 1px solid #c1c1c1;
+	color: #c1c1c1;
+}
+
+.floatingnum {
+	opacity:0.75;
+	transition: opacity 1s, visibility 1s, top 1s;
+}
+
+
+/* BUY MODE */
+
+#factories .section_name strong {
+	float:left;
+	margin-top:2px;
+}
+
+#buymode {
+	float:right;
+}
+
+#buymode_quantity {
+	margin-left:20px;
+}
+
+#buymode_mode, #buymode_quantity {
+	float:left;
+	background-color:#000;
+}
+
+#buymode span:hover {
+	background-color:#282828;
+}
+
+#buymode span, #buymode .active:hover {
+	padding:3px 5px 3px 5px;
+	color:#c1c1c1;
+	display:inline-block;
+	font-size:15px;
+	border-radius:3px;
+	cursor:pointer;
+}
+
+#buymode .active, #buymode .active:hover {
+	background-color:#424242;
+	color:white;
+	font-weight:bold;
+}
+
+#buttons {
+	margin-top:10px;
+}
+
+button {
+	background-color:#282828;
+	color:white;
+	padding:10px;
+	border:none;
+	margin-left:10px;
+	margin-bottom:5px;
+	border-radius:5px;
+	border:1px solid transparent;
+}
+
+button:hover {
+	background-color: #424242;
+	border:1px solid grey;
+}
+
+button:active {
+    -moz-box-shadow:    inset 0 0 12px black;
+    -webkit-box-shadow: inset 0 0 12px black;
+    box-shadow:         inset 0 0 12px black;
+    border:1px solid white;
+}
+
+button:focus {
+	outline: none;
+}
+
+
+
+.progressbar_container {
+	margin-left:10px;
+	margin-top:25px;
+}
+
+.progressbar_outer {
+	width: 150px;
+	height:7px;
+	border-radius:7px;
+	background-color: black;
+	padding:3px;
+	float:left;
+}
+.progressbar_inner {
+	width:50%;
+	/*transition: width 1s;*/
+	height:100%;
+	border-radius:7px;
+	background-color: white;
+}
+
+.timeleft {
+	float:left;
+	font-weight: bold;
+	margin-top: -5px;
+    margin-left: 10px;
+	opacity: 0;
+	transition:opacity 0.15s;
+}
+
+.progressbar_container {
+	float:left;
+/*	position: absolute;
+	top: 50%;
+	transform: 			translateY(-50%);*/
+}
+
+.buff_container:hover .timeleft {
+	opacity: 1;
+}
+
+.buff_container {
+	clear:both;
+	display:none;
+}
+
+#buffs {
+	display:none;
+}
+
+#achievement_popups {
+	position:fixed;
+	bottom:0;
+	left:0;
+	height: auto;
+	z-index:100;
+}
+
+.achievement {
+/*	height: 100px;*/
+	background-color:black;
+	padding:10px;
+	color:white;
+	margin-left:10px;
+	margin-bottom:10px;
+	width: 400px;
+	opacity:1;
+	z-index:100;
+}
+
+.tippy-popper .achievement {
+	background-color:transparent;
+	margin:0;
+	padding:0;
+	opacity:1;
+	width: 400px;
+}
+
+.achievement, .achievement *{
+	cursor: pointer;
+}
+
+.achievement .icon {
+	float:left;
+	width:64px;
+	height:64px;
+}
+
+.achievement .text {
+	float:left;
+	margin-left:10px;
+}
+
+.achievement .description {
+	display:block;
+}
+
+.achievement .redtext {
+	color:red;
+	font-size:12px;
+	display:block;
+}
+
+.achievement .value {
+	float:right;
+	font-size:30px;
+	color:green;
+	font-weight:bold;
+}
+
+.locked img {
+	filter: brightness(50%) grayscale(100%);
+}
+
+#inv_hover {
+	margin-top:-25px;
+	margin-left:25px;
+	position:absolute;
+	display:none;
+	pointer-events:none;
+}
+
+#inv_hover::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+    border-opacity:0.8;
+}
+
+.modal {
+	display:none;
+	position:fixed;
+	width:700px;
+	height:500px;
+	left:50%;
+	top:50%;
+	margin-left:-350px;
+	margin-top:-250px;
+	padding:20px;
+	box-shadow:0px 0px 8px black;
+	background-color:#444444;
+	border-radius:10px;
+	z-index:100;
+}
+
+.modal_inner {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height:93%;
+	display:inline-block;
+}
+
+.modal .popup {
+	z-index:101;
+}
+
+.modal h2 {
+	color:white;
+	font-size:24px;
+	padding:0px;
+	margin:0px;
+}
+
+.achievement_icon .popup_anchor {
+	width:64px;
+	height:64px;
+	border:none;
+	margin:5px;
+	float:left;
+}
+
+.achievement_icon .popup {
+	width:400px;
+	margin-left:-210px;
+}
+
+.modal .close {
+	position:absolute;
+	top:0px;
+	right:0px;
+	padding:10px;
+	margin:10px;
+	color:white;
+	font-size:15px;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+#menu { 
+	text-align:right;
+}
+
+a {
+	color:black;
+	margin-left:15px;
+	cursor:pointer;
+}
+
+.modal strong {
+	color:white;
+	font-size:18px;
+	font-weight:normal;
+	line-height:30px;
+}
+
+.modal span {
+	color:white;
+	margin-left:10px;
+}
+
+#settings input {
+	margin-left:10px;
+}
+
+/*img.clickpower {
+	height:50px;
+}*/
+
+.popup_anchor {
+	border:none;
+}
+
+.popup_anchor img {
+	height:50px;
+}
+
+/*.scroll {
+	overflow-x:scroll;
+	overflow-y:hidden;
+	white-space:nowrap;
+	width:600px;
+}*/
+
+.popup_container {
+	display: inline-block;
+	float:none;
+	text-align:center;
+/*	width:110px;*/
+}
+
+.popup_container,
+.popup_container * {
+	cursor:pointer;
+}
+
+.popup_anchor span {
+	display:block;
+}
+
+#factories .popup_anchor .owned {
+	font-weight:bold;
+	font-size:20px;
+}
+
+#factories .popup_anchor .price {
+	font-size:14px;
+}
+
+#click_powers .active .name {
+	font-weight:bold;
+}
+
+#click_powers .owned .price,
+#click_powers .active .price {
+	/*display:none;*/
+	opacity: 0; /*todo*/
+}
+
+.can_afford .price {
+	color:green;
+}
+
+.cant_afford .price {
+	color:red;
+}
+
+.cant_afford img {
+	/*filter: grayscale(100%);*/
+	opacity:0.3;
+}
+
+/*.timeleft {
+	float:left;
+	font-weight: bold;
+	opacity:0;
+	transition:opacity 0.1s;
+	padding:10px;
+}
+
+.popup_container:hover .timeleft {
+	opacity: 1;
+}*/
+
+
+/*#buffs .popup_container .popup, #buffs .popup_container .popup::after {
+	left:45px;
+}*/
+
+.upgrade .popup_anchor {
+	width:64px;
+	height:64px;
+	text-align:center;
+	vertical-align: center;
+	padding:0px;
+}
+
+.upgrade .popup_anchor img {
+	max-width:64px;
+	max-height:64px;
+}
+
+.upgrade .disabled {
+	border: none;
+	/*filter: brightness(50%) grayscale(100%);*/
+	opacity: 0.3;
+}
+
+#open_owned_upgrades{
+	display:block;
+	text-align:center;
+}
+
+.buff {
+	float:left;
+}
+
+.buff .popup_anchor {
+	padding:0;
+}
+.buff .popup_anchor{
+	width:64px;
+	text-align:center;
+}
+
+.tippy-tooltip {
+	background-color:black;
+	box-shadow:0px 0px 8px #727272;
+	pointer-events:none;
+}
+
+.popup {
+	display:none;
+}
+
+.achievement .achievement { /* TODO this is hacky */
+	margin:0;
+	padding:0;
+	background-color:transparent;
+}
+
+.upgrade {
+	display:none;
+	opacity:0;
+	transition:opacity 1s;
+}
+
+#upgrades {
+	min-height: 135px;
+}
+
+#click_powers .popup_anchor,
+#factories .popup_anchor {
+	width:64px;
+}
+
+.gem_click_power .popup_anchor {
+	display:none;
+}
+
+#drop {
+	width:200px;
+	height:64px;
+	margin-left:60px;
+	font-size:28px;
+}
+
+#autodrop_icon {
+	display:none;
+	max-height:64px;
+	vertical-align:top;
+	margin-left:5px;
+}
+
+.achievement_locked {
+	filter: grayscale(100%);
+}
+
+.upgrade.popup_container {
+	float:left;
+}
+
+.factory .popup_anchor {
+	display:none;
+}
+
+.achievement .text {
+	width: 250px;
+}
+
+.tippy-popper .owned {
+	display:none;
+}
+
+
+#export_instructions {
+	display:none;
+}
+
+#export_textarea {
+	display: none;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+html {
+	background-image: url(img/bg.png);
+}
+
+.section_name {
+	border-radius:4px;
+	box-shadow: 0px 0px 5px #888888;
+	/*background-image: url(img/gun_metal.png);*/
+}
+
+/*html {
+	background-color: #2B2B2B;
+	color:white;
+}*/
+
+/*.factory .owned {
+	display: none; /* Hide tippy bug */
+/*}*/

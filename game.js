@@ -853,14 +853,14 @@ function loadSave(save){
 }
 
 function saveGame() {
-	localStorage.setItem("save", buildSave());
+	localStorage.setItem("gem_drop_save", buildSave());
 	return true;
 	//console.log("Game saved");
 }
 
 function loadGame() {
 	// Get save from localStorage
-	var gameString = localStorage.getItem("save");
+	var gameString = localStorage.getItem("gem_drop_save");
 	if (gameString === null) {
 		console.log("No save game found");
 		return false;

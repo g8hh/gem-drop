@@ -469,7 +469,7 @@ function initSettings() {
 	// Save
 	UI.settings.save.onclick = function() {
 		if(saveGame()){
-			alert("Game saved.");
+			alert("游戏已保存.");
 			UI.settings.lastsaved.innerText = "Last saved less than a second ago";
 		}
 	};
@@ -480,7 +480,7 @@ function initSettings() {
 	// Import
 	UI.settings.import_button.onclick = function() {
 		if(importGame(UI.settings.import_field.value)){
-			alert("Game imported.");
+			alert("导入成功.");
 			saveGame();
 			location.reload();
 		}
@@ -488,7 +488,7 @@ function initSettings() {
 
 	// Reset
 	UI.settings.reset.onclick = function() {
-		if(confirm("Are you sure? This will completely wipe your save and reload the game."))
+		if(confirm("你确定吗？ 这将完全清除您的保存并重新加载游戏。"))
 			resetGame();
 	}
 
